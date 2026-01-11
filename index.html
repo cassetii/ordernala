@@ -186,13 +186,8 @@
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
-        .form-control.is-valid {
-            border-color: var(--success);
-        }
-
-        .form-control.is-invalid {
-            border-color: var(--danger);
-        }
+        .form-control.is-valid { border-color: var(--success); }
+        .form-control.is-invalid { border-color: var(--danger); }
 
         textarea.form-control {
             min-height: 100px;
@@ -246,8 +241,8 @@
             box-shadow: var(--shadow-lg);
         }
 
-        .btn-whatsapp {
-            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+        .btn-submit {
+            background: var(--gradient-primary);
             color: white;
             width: 100%;
             padding: 1.25rem 2rem;
@@ -255,9 +250,18 @@
             font-weight: 600;
         }
 
-        .btn-whatsapp:hover:not(:disabled) {
+        .btn-submit:hover:not(:disabled) {
             transform: translateY(-2px);
             box-shadow: var(--shadow-xl);
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            color: white;
+            width: 100%;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            margin-top: 1rem;
         }
 
         .form-check {
@@ -337,16 +341,78 @@
             margin-top: 1rem;
         }
 
-        .contact-icon {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
+        .contact-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
         .contact-label {
             font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
             margin-bottom: 2px;
+        }
+
+        /* Success Modal */
+        .success-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            padding: 1rem;
+        }
+
+        .success-modal.show { display: flex; }
+
+        .success-content {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            max-width: 350px;
+            width: 100%;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .success-icon i { font-size: 2.5rem; color: white; }
+
+        .success-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 0.5rem;
+        }
+
+        .success-message {
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+        }
+
+        .booking-id {
+            background: var(--gray-100);
+            padding: 0.75rem;
+            border-radius: var(--radius-md);
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
         }
 
         .toast-container {
@@ -375,10 +441,6 @@
 
         .toast-notification.show { transform: translateX(0); }
         .toast-notification.error { border-left-color: var(--danger); }
-
-        .toast-icon { font-size: 1.25rem; }
-        .toast-success .toast-icon { color: var(--success); }
-        .toast-error .toast-icon { color: var(--danger); }
 
         .loading-overlay {
             position: fixed;
@@ -418,12 +480,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        .loading-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
         @media (max-width: 480px) {
             .mobile-container {
                 border-radius: 0;
@@ -447,7 +503,7 @@
         </div>
 
         <div class="form-container">
-            <form id="acForm">
+            <form id="bookingForm">
                 <div data-aos="fade-up" data-aos-delay="100">
                     <div class="section-header">
                         <div class="section-icon">
@@ -478,10 +534,7 @@
                         <label class="form-label" for="nohp">
                             <i class="bi bi-whatsapp"></i> No. WhatsApp
                         </label>
-                        <div class="input-group">
-                            <input type="tel" class="form-control" id="nohp" placeholder="08xxxxxxxxx" required>
-                            <i class="bi bi-phone input-icon"></i>
-                        </div>
+                        <input type="tel" class="form-control" id="nohp" placeholder="08xxxxxxxxx" required>
                     </div>
                 </div>
 
@@ -506,16 +559,16 @@
                         </label>
                         <select class="form-select" id="waktu" required>
                             <option value="">Pilih waktu service</option>
-                            <option value="08:00">08:00 WIB</option>
-                            <option value="09:00">09:00 WIB</option>
-                            <option value="10:00">10:00 WIB</option>
-                            <option value="11:00">11:00 WIB</option>
-                            <option value="13:00">13:00 WIB</option>
-                            <option value="14:00">14:00 WIB</option>
-                            <option value="15:00">15:00 WIB</option>
-                            <option value="16:00">16:00 WIB</option>
-                            <option value="17:00">17:00 WIB</option>
-                            <option value="18:00">18:00 WIB</option>
+                            <option value="08:00">08:00 WITA</option>
+                            <option value="09:00">09:00 WITA</option>
+                            <option value="10:00">10:00 WITA</option>
+                            <option value="11:00">11:00 WITA</option>
+                            <option value="13:00">13:00 WITA</option>
+                            <option value="14:00">14:00 WITA</option>
+                            <option value="15:00">15:00 WITA</option>
+                            <option value="16:00">16:00 WITA</option>
+                            <option value="17:00">17:00 WITA</option>
+                            <option value="18:00">18:00 WITA</option>
                         </select>
                     </div>
                 </div>
@@ -532,7 +585,7 @@
                         <label class="form-label" for="unit">
                             <i class="bi bi-hash"></i> Jumlah Unit AC
                         </label>
-                        <input type="number" class="form-control" id="unit" min="1" max="20" placeholder="Jumlah unit" required>
+                        <input type="number" class="form-control" id="unit" min="1" max="50" placeholder="Jumlah unit" required>
                     </div>
 
                     <div class="form-group">
@@ -582,9 +635,9 @@
                 </div>
 
                 <div data-aos="fade-up" data-aos-delay="500">
-                    <button type="button" class="btn btn-whatsapp" onclick="kirimBooking()">
-                        <i class="bi bi-whatsapp"></i>
-                        Kirim Booking via WhatsApp
+                    <button type="button" class="btn btn-submit" onclick="kirimBooking()">
+                        <i class="bi bi-send-fill"></i>
+                        Kirim Booking
                     </button>
                 </div>
             </form>
@@ -626,6 +679,26 @@
         </div>
     </div>
 
+    <!-- Success Modal -->
+    <div class="success-modal" id="successModal">
+        <div class="success-content">
+            <div class="success-icon">
+                <i class="bi bi-check-lg"></i>
+            </div>
+            <div class="success-title">Booking Berhasil!</div>
+            <div class="success-message">Data booking Anda sudah tersimpan. Tim kami akan segera menghubungi Anda.</div>
+            <div class="booking-id" id="bookingIdDisplay">#XXXXXXXX</div>
+            <button class="btn btn-whatsapp" onclick="openWhatsApp()">
+                <i class="bi bi-whatsapp"></i>
+                Konfirmasi via WhatsApp
+            </button>
+            <button class="btn btn-submit" style="margin-top: 0.5rem; background: var(--gray-200); color: var(--gray-700);" onclick="closeSuccessModal()">
+                Tutup
+            </button>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-content">
             <div class="spinner"></div>
@@ -637,51 +710,23 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- AOS Animation -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-    <!-- Firebase SDK v9+ (modular) -->
-    <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
-
-        // Firebase Configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyC7LoegPtwjVx8TKxQeXkJ92wwiqqjOWtA",
-            authDomain: "mainnala.firebaseapp.com",
-            projectId: "mainnala",
-            storageBucket: "mainnala.firebasestorage.app",
-            messagingSenderId: "820477796247",
-            appId: "1:820477796247:web:be9d047143164947c6aed2",
-            measurementId: "G-NZFJ8X0S6V"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        // Make saveToFirebase available globally
-        window.saveToFirebase = async function(bookingData) {
-            try {
-                const docRef = await addDoc(collection(db, 'bookings'), {
-                    ...bookingData,
-                    status: 'pending',
-                    price: 0,
-                    createdAt: serverTimestamp(),
-                    updatedAt: serverTimestamp()
-                });
-                console.log('✅ Booking saved to Firebase:', docRef.id);
-                return docRef.id;
-            } catch (error) {
-                console.error('❌ Firebase Error:', error);
-                throw error;
-            }
-        };
-    </script>
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <script>
+        // ========== SUPABASE CONFIG ==========
+        const SUPABASE_URL = 'https://kmgobitaptkyufepsovo.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_AsU20RPtLj9UCMTxtegbxg_yFzKUAru';
+        
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        // Store last booking for WhatsApp
+        let lastBooking = null;
+
         // Initialize AOS
         AOS.init({ duration: 600, once: true });
 
-        // Set minimum date
+        // Set minimum date to tomorrow
         function setMinDate() {
             const tomorrow = new Date();
             tomorrow.setDate(tomorrow.getDate() + 1);
@@ -690,37 +735,31 @@
             document.getElementById('tanggal').value = dateStr;
         }
 
-        // Show toast notification
+        // Toast notification
         function showToast(message, type = 'success') {
             const container = document.getElementById('toastContainer');
             const toast = document.createElement('div');
             const icon = type === 'success' ? 'bi-check-circle-fill' : 'bi-x-circle-fill';
             
             toast.className = `toast-notification toast-${type}`;
-            toast.innerHTML = `<i class="bi ${icon} toast-icon"></i><div>${message}</div>`;
+            toast.innerHTML = `<i class="bi ${icon}"></i><div>${message}</div>`;
             
             container.appendChild(toast);
             setTimeout(() => toast.classList.add('show'), 100);
             
             setTimeout(() => {
                 toast.classList.remove('show');
-                setTimeout(() => {
-                    if (container.contains(toast)) {
-                        container.removeChild(toast);
-                    }
-                }, 300);
+                setTimeout(() => container.removeChild(toast), 300);
             }, 4000);
         }
 
         // Get user location
         function ambilLokasi() {
-            const loading = document.getElementById('loadingOverlay');
             const btn = event.target;
             const originalText = btn.innerHTML;
             
             btn.innerHTML = '<i class="bi bi-arrow-clockwise"></i> Mengambil...';
             btn.disabled = true;
-            loading.classList.add('show');
             
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
@@ -740,13 +779,11 @@
                                 document.getElementById('lokasi').value = mapsURL;
                             });
                         
-                        loading.classList.remove('show');
                         btn.innerHTML = originalText;
                         btn.disabled = false;
                         showToast('Lokasi berhasil diambil!');
                     },
                     error => {
-                        loading.classList.remove('show');
                         btn.innerHTML = originalText;
                         btn.disabled = false;
                         showToast('Gagal ambil lokasi. Input manual.', 'error');
@@ -754,7 +791,6 @@
                     { enableHighAccuracy: true, timeout: 10000 }
                 );
             } else {
-                loading.classList.remove('show');
                 btn.innerHTML = originalText;
                 btn.disabled = false;
                 showToast('Browser tidak support geolocation.', 'error');
@@ -774,7 +810,6 @@
                 agreement: document.getElementById('agreement').checked
             };
 
-            // Reset validation
             document.querySelectorAll('.form-control, .form-select').forEach(el => {
                 el.classList.remove('is-valid', 'is-invalid');
             });
@@ -805,29 +840,21 @@
             if (!fields.tanggal) {
                 document.getElementById('tanggal').classList.add('is-invalid');
                 isValid = false;
-            } else {
-                document.getElementById('tanggal').classList.add('is-valid');
             }
 
             if (!fields.waktu) {
                 document.getElementById('waktu').classList.add('is-invalid');
                 isValid = false;
-            } else {
-                document.getElementById('waktu').classList.add('is-valid');
             }
 
-            if (!fields.unit || fields.unit < 1 || fields.unit > 20) {
+            if (!fields.unit || fields.unit < 1) {
                 document.getElementById('unit').classList.add('is-invalid');
                 isValid = false;
-            } else {
-                document.getElementById('unit').classList.add('is-valid');
             }
 
             if (!fields.jenis) {
                 document.getElementById('jenis').classList.add('is-invalid');
                 isValid = false;
-            } else {
-                document.getElementById('jenis').classList.add('is-valid');
             }
 
             if (!fields.agreement) {
@@ -846,11 +873,21 @@
             return isValid;
         }
 
+        // Save to Supabase
+        async function saveToSupabase(bookingData) {
+            const { data, error } = await supabaseClient
+                .from('bookings')
+                .insert([bookingData])
+                .select()
+                .single();
+            
+            if (error) throw error;
+            return data;
+        }
+
         // Send booking
         async function kirimBooking() {
-            if (!validateForm()) {
-                return;
-            }
+            if (!validateForm()) return;
 
             const loading = document.getElementById('loadingOverlay');
             const btn = event.target;
@@ -860,82 +897,82 @@
             btn.disabled = true;
             loading.classList.add('show');
 
-            const fields = {
-                nama: document.getElementById('nama').value.trim(),
-                lokasi: document.getElementById('lokasi').value.trim(),
-                nohp: document.getElementById('nohp').value.trim(),
-                tanggal: document.getElementById('tanggal').value,
-                waktu: document.getElementById('waktu').value,
-                unit: document.getElementById('unit').value,
-                jenis: document.getElementById('jenis').value,
-                tipe_ac: document.getElementById('tipe_ac').value,
-                keluhan: document.getElementById('keluhan').value.trim()
+            const bookingData = {
+                customer_name: document.getElementById('nama').value.trim(),
+                customer_phone: document.getElementById('nohp').value.trim(),
+                address: document.getElementById('lokasi').value.trim(),
+                service_date: document.getElementById('tanggal').value,
+                service_time: document.getElementById('waktu').value,
+                unit_count: parseInt(document.getElementById('unit').value),
+                service_type: document.getElementById('jenis').value,
+                ac_type: document.getElementById('tipe_ac').value || null,
+                notes: document.getElementById('keluhan').value.trim() || null,
+                status: 'pending'
             };
 
             try {
-                // Save to Firebase
-                const bookingId = await window.saveToFirebase({
-                    customerName: fields.nama,
-                    customerPhone: fields.nohp,
-                    address: fields.lokasi,
-                    serviceDate: fields.tanggal,
-                    serviceTime: fields.waktu,
-                    unitCount: parseInt(fields.unit),
-                    serviceType: fields.jenis,
-                    acType: fields.tipe_ac || 'Tidak disebutkan',
-                    notes: fields.keluhan || 'Tidak ada'
-                });
-
-                // Format date
-                const dateObj = new Date(fields.tanggal);
-                const formattedDate = dateObj.toLocaleDateString('id-ID', {
-                    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-                });
-
-                // Create WhatsApp message
-                const pesan = `*📋 BOOKING SERVICE AC - NALA AIRCON*
-*ID Booking:* ${bookingId}
-
-🧍 *Nama:* ${fields.nama}
-📍 *Lokasi:* ${fields.lokasi}
-📞 *No. HP:* ${fields.nohp}
-📆 *Tanggal:* ${formattedDate}
-⏰ *Waktu:* ${fields.waktu} WIB
-❄️ *Jumlah Unit:* ${fields.unit} unit
-🔧 *Jenis Service:* ${fields.jenis}
-🏠 *Tipe AC:* ${fields.tipe_ac || 'Tidak disebutkan'}
-📝 *Keluhan:* ${fields.keluhan || 'Tidak ada'}
-
----
-✅ _Data sudah tersimpan di sistem kami._
-_Tim kami akan segera menghubungi Anda untuk konfirmasi!_
-
-🙏 *Terima kasih telah mempercayakan Nala Aircon*`;
-
-                const whatsappURL = `https://wa.me/6287846919314?text=${encodeURIComponent(pesan)}`;
-
-                setTimeout(() => {
-                    loading.classList.remove('show');
-                    btn.innerHTML = originalText;
-                    btn.disabled = false;
-                    
-                    window.open(whatsappURL, '_blank');
-                    showToast('✅ Booking berhasil disimpan & dikirim!');
-                    
-                    // Optional: Reset form
-                    // document.getElementById('acForm').reset();
-                    // setMinDate();
-                }, 1500);
+                const result = await saveToSupabase(bookingData);
+                
+                lastBooking = { ...bookingData, id: result.id };
+                
+                loading.classList.remove('show');
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                
+                // Show success modal
+                document.getElementById('bookingIdDisplay').textContent = '#' + result.id.substring(0, 8).toUpperCase();
+                document.getElementById('successModal').classList.add('show');
+                
+                // Reset form
+                document.getElementById('bookingForm').reset();
+                setMinDate();
 
             } catch (error) {
                 loading.classList.remove('show');
                 btn.innerHTML = originalText;
                 btn.disabled = false;
+                console.error('Error:', error);
                 showToast('❌ Gagal menyimpan: ' + error.message, 'error');
             }
         }
 
-        // Real-time validation
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('show');
+        }
+
+        function openWhatsApp() {
+            if (!lastBooking) return;
+            
+            const dateObj = new Date(lastBooking.service_date);
+            const formattedDate = dateObj.toLocaleDateString('id-ID', {
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+            });
+
+            const pesan = `*📋 BOOKING SERVICE AC - NALA AIRCON*
+*ID:* #${lastBooking.id.substring(0, 8).toUpperCase()}
+
+🧍 *Nama:* ${lastBooking.customer_name}
+📍 *Lokasi:* ${lastBooking.address}
+📞 *No. HP:* ${lastBooking.customer_phone}
+📆 *Tanggal:* ${formattedDate}
+⏰ *Waktu:* ${lastBooking.service_time} WITA
+❄️ *Jumlah Unit:* ${lastBooking.unit_count} unit
+🔧 *Jenis Service:* ${lastBooking.service_type}
+🏠 *Tipe AC:* ${lastBooking.ac_type || 'Tidak disebutkan'}
+📝 *Catatan:* ${lastBooking.notes || 'Tidak ada'}
+
+---
+✅ _Data sudah tersimpan di sistem._
+_Mohon konfirmasi jadwal booking saya._
+
+🙏 *Terima kasih - Nala Aircon*`;
+
+            const waURL = `https://wa.me/6287846919314?text=${encodeURIComponent(pesan)}`;
+            window.open(waURL, '_blank');
+            closeSuccessModal();
+        }
+
+        // Phone number validation
         document.getElementById('nohp').addEventListener('input', function() {
             let value = this.value.replace(/[^0-9]/g, '');
             if (value.length > 13) value = value.substring(0, 13);
@@ -947,15 +984,13 @@ _Tim kami akan segera menghubungi Anda untuk konfirmasi!_
             } else if (value.length > 0) {
                 this.classList.remove('is-valid');
                 this.classList.add('is-invalid');
-            } else {
-                this.classList.remove('is-valid', 'is-invalid');
             }
         });
 
-        // Initialize on load
+        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             setMinDate();
-            console.log('🚀 Nala Aircon Booking Form Ready!');
+            console.log('🚀 Nala Aircon Booking Form Ready (Supabase)!');
         });
     </script>
 </body>
